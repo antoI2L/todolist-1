@@ -12,25 +12,42 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array(
-                'label' => 'category.form.name',
-            ))
-            ->add('description', null, array(
-                'label' => 'category.form.description',
-            ))
-            ->add('color', null, array(
-                'label' => 'category.form.color',
-            ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'category.form.save',
-            ))
-        ;
+            ->add(
+                'name',
+                null,
+                array(
+                    'label' => 'category.form.name',
+                )
+            )
+            ->add(
+                'description',
+                null,
+                array(
+                    'label' => 'category.form.description',
+                )
+            )
+            ->add(
+                'color',
+                null,
+                array(
+                    'label' => 'category.form.color',
+                )
+            )
+            ->add(
+                'save',
+                SubmitType::class,
+                array(
+                    'label' => 'category.form.save',
+                )
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'TodoBundle\Entity\Category',
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'TodoBundle\Entity\Category',
+            )
+        );
     }
 }

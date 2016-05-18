@@ -3,7 +3,6 @@
 namespace TodoBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use TodoBundle\Entity\Category;
 use TodoBundle\Entity\Tag;
 use TodoBundle\Entity\User;
 
@@ -16,9 +15,9 @@ class TaskRepository extends EntityRepository
             ->andWhere('t.dueDate <= :maxDate')->setParameter('maxDate', $maxDate)
             ->andWhere('t.user = :user')->setParameter('user', $user)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
+
     public function getAllOfTheDay(User $user)
     {
         $minDate = new \DateTime();
@@ -57,8 +56,7 @@ class TaskRepository extends EntityRepository
             ->andWhere('t.category = :category')->setParameter('category', $category)
             ->orderBy('t.'.$field, $order)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     public function getTasksByTagAndUser(User $user, Tag $tag, $field, $order)
@@ -69,14 +67,13 @@ class TaskRepository extends EntityRepository
             ->andWhere('t.user = :user')->setParameter('user', $user)
             ->orderBy('t.'.$field, $order)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     /**
      * @param User $user
-     * @param $field Le champ sur lequel on va trier
-     * @param $order asc ou desc
+     * @param string $field Le champ sur lequel on va trier
+     * @param string $order asc ou desc
      */
     public function getTasksOrdered(User $user, $field, $order)
     {
@@ -84,19 +81,18 @@ class TaskRepository extends EntityRepository
             ->where('t.user = :user')->setParameter('user', $user)
             ->orderBy('t.'.$field, $order)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     public function getOutdatedTasks(User $user)
     {
         return $this->createQueryBuilder('t')
-                    ->where('t.user = :user')
-                    ->andWhere('t.dueDate < :now')
-                    ->setParameter('user', $user)
-                    ->setParameter('now', date('Y-m-d H:i'))
-                    ->orderBy('t.dueDate', 'asc')
-                    ->getQuery()
-                    ->getResult();
+            ->where('t.user = :user')
+            ->andWhere('t.dueDate < :now')
+            ->setParameter('user', $user)
+            ->setParameter('now', date('Y-m-d H:i'))
+            ->orderBy('t.dueDate', 'asc')
+            ->getQuery()
+            ->getResult();
     }
 }

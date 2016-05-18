@@ -5,7 +5,7 @@
     <p>{% trans %}homepage.welcome_message{% endtrans %}</p>
 
 
-    <h1>Outdated Tasks</h1>
+    <h1>{% trans %}outdated.title{% endtrans %}</h1>
     <table class="table table-striped table-bordered">
         <tr>
             <th>
@@ -50,17 +50,17 @@
                 </td>
                 <td>
                     <a class="btn btn-warning btn-sm" href="{{ path('update_task', {'task': task.id}) }}">
-                        <i class="glyphicon glyphicon-edit"></i> Update
+                        <i class="glyphicon glyphicon-edit"></i> {% trans %}button.update{% endtrans %}
                     </a>
                     <a class="btn btn-danger btn-sm" href="{{ path('remove_task', {'task': task.id}) }}">
-                        <i class="glyphicon glyphicon-trash"></i> Delete
+                        <i class="glyphicon glyphicon-trash"></i> {% trans %}button.delete{% endtrans %}
                     </a>
 
                     {% set subject = 'Tâche n° ' ~ task.id ~ ' : ' ~ task.label %}
                     {% set body = 'Titre : ' ~ task.label ~ ', Description : ' ~ task.description ~ ', Echeance : ' ~ task.dueDate|date('d/m/Y à H:i') %}
 
                     <a class="btn btn-info btn-sm" href="mailto:?subject={{ subject|url_encode }}&body={{ body|url_encode }}">
-                        <i class="glyphicon glyphicon-envelope"></i> Share
+                        <i class="glyphicon glyphicon-envelope"></i> {% trans %}button.share{% endtrans %}
                     </a>
                 </td>
             </tr>

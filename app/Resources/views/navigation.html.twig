@@ -7,59 +7,59 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ path('homepage') }}">My great todolist app</a>
+            <a class="navbar-brand" href="{{ path('homepage') }}">{% trans %}app.title{% endtrans %}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tasks <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}menu.task{% endtrans %} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ path('create_task') }}">Create new task</a>
+                                <a href="{{ path('create_task') }}">{% trans %}menu.task.add{% endtrans %}</a>
                             </li>
                             <li>
-                                <a href="{{ path('list_task') }}">List tasks</a>
+                                <a href="{{ path('list_task') }}">{% trans %}menu.task.list{% endtrans %}</a>
                             </li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tags <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}menu.tag{% endtrans %} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ path('create_tag') }}">Create new tag</a>
+                                <a href="{{ path('create_tag') }}">{% trans %}menu.tag.add{% endtrans %}</a>
                             </li>
                             <li>
-                                <a href="{{ path('list_tag') }}">List tags</a>
+                                <a href="{{ path('list_tag') }}">{% trans %}menu.task.list{% endtrans %}</a>
                             </li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}menu.category{% endtrans %} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ path('create_category') }}">Create new category</a>
+                                <a href="{{ path('create_category') }}">{% trans %}menu.category.add{% endtrans %}</a>
                             </li>
                             <li>
-                                <a href="{{ path('list_category') }}">List categories</a>
+                                <a href="{{ path('list_category') }}">{% trans %}menu.category.list{% endtrans %}</a>
                             </li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filters <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}menu.filter{% endtrans %} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ path('tasks_of_the_day') }}">Tasks of the day</a>
+                                <a href="{{ path('tasks_of_the_day') }}">{% trans %}menu.filter.today{% endtrans %} </a>
                             </li>
                             <li>
-                                <a href="{{ path('tasks_of_the_week') }}">Tasks of the week</a>
+                                <a href="{{ path('tasks_of_the_week') }}">{% trans %}menu.filter.week{% endtrans %} </a>
                             </li>
                             <li>
-                                <a href="{{ path('tasks_of_the_month') }}">Tasks of the month</a>
+                                <a href="{{ path('tasks_of_the_month') }}">{% trans %}menu.filter.month{% endtrans %} </a>
                             </li>
                         </ul>
                     </li>
-                    <li role="presentation"><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                    <li role="presentation"><a href="{{ path('fos_user_security_logout') }}">{% trans %}menu.logout{% endtrans %}</a></li>
                 {% else %}
                     <li role="presentation"><a href="{{ path('fos_user_registration_register') }}">Create an account</a></li>
                 {% endif %}

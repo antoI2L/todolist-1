@@ -14,6 +14,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class TaskController extends Controller
 {
     /**
+     * Permet de créer une tâche
+     *
      * @Route("/task/create", name="create_task")
      */
     public function createAction(Request $request)
@@ -24,10 +26,14 @@ class TaskController extends Controller
 
         $form = $this
             ->createForm(TaskType::class, $task)
-            ->add('save', SubmitType::class, array(
-                'label' => 'task.form.save',
-                'attr' => ['class' => 'btn btn-default'],
-            ));
+            ->add(
+                'save',
+                SubmitType::class,
+                array(
+                    'label' => 'task.form.save',
+                    'attr' => ['class' => 'btn btn-default'],
+                )
+            );
 
         $form->handleRequest($request);
 
@@ -43,14 +49,17 @@ class TaskController extends Controller
             return $this->redirect('/');
         }
 
-        return $this->render('TodoBundle:Task:create.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        return $this->render(
+            'TodoBundle:Task:create.html.twig',
+            array(
+                'form' => $form->createView(),
+            )
+        );
     }
 
     private function getPagination($request, $tasks)
     {
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $tasks,
             $request->query->getInt('page', 1),
@@ -61,6 +70,8 @@ class TaskController extends Controller
     }
 
     /**
+     * Permet de lister les tâches
+     *
      * @Route("/task/list/{field}/{order}", requirements={
      *     "field" : "label|dueDate|createdAt",
      *     "order" : "asc|desc"
@@ -80,12 +91,17 @@ class TaskController extends Controller
                 $order
             );
 
-        return $this->render('TodoBundle:Task:list.html.twig', array(
-            'pagination' => $this->getPagination($request, $tasks)
-        ));
+        return $this->render(
+            'TodoBundle:Task:list.html.twig',
+            array(
+                'pagination' => $this->getPagination($request, $tasks),
+            )
+        );
     }
 
     /**
+     * Permet de lister les tâches par catégorie
+     *
      * @Route("/task/category/{id}/{field}/{order}", requirements={
      *     "id" = "\d+",
      *     "field" : "label|dueDate|createdAt",
@@ -107,12 +123,17 @@ class TaskController extends Controller
                 $order
             );
 
-        return $this->render('TodoBundle:Task:list.html.twig', array(
-            'pagination' => $this->getPagination($request, $tasks)
-        ));
+        return $this->render(
+            'TodoBundle:Task:list.html.twig',
+            array(
+                'pagination' => $this->getPagination($request, $tasks),
+            )
+        );
     }
 
     /**
+     * Permet de lister les tâches par tag
+     *
      * @Route("/task/tag/{tag}/{field}/{order}", requirements={
      *     "tag" = "\d+",
      *     "field" : "label|dueDate|createdAt",
@@ -135,9 +156,12 @@ class TaskController extends Controller
                 $order
             );
 
-        return $this->render('TodoBundle:Task:list.html.twig', array(
-            'pagination' => $this->getPagination($request, $tasks)
-        ));
+        return $this->render(
+            'TodoBundle:Task:list.html.twig',
+            array(
+                'pagination' => $this->getPagination($request, $tasks),
+            )
+        );
     }
 
     /**
@@ -150,9 +174,12 @@ class TaskController extends Controller
             ->getRepository('TodoBundle:Task')
             ->getAllOfTheDay($this->getUser());
 
-        return $this->render('TodoBundle:Task:list.html.twig', array(
-            'tasks' => $tasks,
-        ));
+        return $this->render(
+            'TodoBundle:Task:list.html.twig',
+            array(
+                'tasks' => $tasks,
+            )
+        );
     }
 
     /**
@@ -165,9 +192,12 @@ class TaskController extends Controller
             ->getRepository('TodoBundle:Task')
             ->getAllOfTheWeek($this->getUser());
 
-        return $this->render('TodoBundle:Task:list.html.twig', array(
-            'tasks' => $tasks,
-        ));
+        return $this->render(
+            'TodoBundle:Task:list.html.twig',
+            array(
+                'tasks' => $tasks,
+            )
+        );
     }
 
     /**
@@ -180,16 +210,22 @@ class TaskController extends Controller
             ->getRepository('TodoBundle:Task')
             ->getAllOfTheMonth($this->getUser());
 
-        return $this->render('TodoBundle:Task:list.html.twig', array(
-            'tasks' => $tasks,
-        ));
+        return $this->render(
+            'TodoBundle:Task:list.html.twig',
+            array(
+                'tasks' => $tasks,
+            )
+        );
     }
 
     /**
+     * Permet de supprimer une tâche
+     *
      * @Route("/task/delete/{task}" , name="remove_task")
      * @ParamConverter("task", class="TodoBundle:Task")
      */
-    public function removeTask(Task $task){
+    public function removeTask(Task $task)
+    {
         $em = $this->getDoctrine()->getManager();
 
 
@@ -198,13 +234,15 @@ class TaskController extends Controller
 
         $this->addFlash(
             'notice',
-            'Task ' . $task->getId() . ' removed with success'
+            'Task '.$task->getId().' removed with success'
         );
 
         return $this->redirect($this->generateUrl('list_task'));
     }
 
     /**
+     * Permet de mettre à jour une tâche
+     *
      * @Route("/task/update/{task}", name="update_task")
      * @ParamConverter("task", class="TodoBundle:Task")
      */
@@ -214,10 +252,14 @@ class TaskController extends Controller
 
         $form = $this
             ->createForm(TaskType::class, $task)
-            ->add('save', SubmitType::class, array(
-                'label' => 'Update',
-                'attr' => ['class' => 'btn btn-success'],
-            ));;
+            ->add(
+                'save',
+                SubmitType::class,
+                array(
+                    'label' => 'task.form.edit',
+                    'attr' => ['class' => 'btn btn-success'],
+                )
+            );;
 
         $form->handleRequest($request);
 
@@ -233,9 +275,12 @@ class TaskController extends Controller
             return $this->redirect($this->generateUrl('list_task'));
         }
 
-        return $this->render('TodoBundle:Task:update.html.twig', array(
-            'form' => $form->createView(),
-            'task' => $task
-        ));
+        return $this->render(
+            'TodoBundle:Task:update.html.twig',
+            array(
+                'form' => $form->createView(),
+                'task' => $task,
+            )
+        );
     }
 }

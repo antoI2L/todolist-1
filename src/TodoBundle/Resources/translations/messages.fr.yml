@@ -8,6 +8,7 @@ task.form.createdat: Créée le
 task.form.updatedat: Mise à jour le
 task.form.status: Statut
 task.form.save: Ajouter
+task.form.edit: Modifier
 user.registration.minmessage: Le nom doit avoir 3 caractères minimum
 task.empty_list: Aucune tâche
 tag.empty_list: Aucun tag
@@ -15,3 +16,22 @@ category.form.name: Nom
 category.form.description: Description
 category.form.color: Couleur
 category.form.save: Ajouter
+button.delete: Supprimer
+button.update: Editer
+button.share: Partager
+outdated.title: Tâches expirées
+app.title: Ma TodoList
+menu.task: Tâches
+menu.task.add: Créer une tâche
+menu.task.list: Liste des tâches
+menu.tag: Tags
+menu.tag.add: Créer un tag
+menu.tag.list: Liste des tags
+menu.category: Catégories
+menu.category.add: Créer une catégorie
+menu.category.list: Liste des catégories
+menu.filter: Filtres
+menu.filter.today: Tâches du jour
+menu.filter.week: Tâches de la semaine
+menu.filter.month: Tâches du mois
+menu.logout: Déconnexion

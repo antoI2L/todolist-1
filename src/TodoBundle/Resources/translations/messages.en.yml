@@ -1,4 +1,37 @@
-hello_world: Hello World!
+hello_world: "Hello World !"
 homepage.welcome_message: Welcome on my todolist application
+task.form.label: Label
+task.form.description: Description
+task.form.duedate: Due Date
+task.form.remindat: Remind At
+task.form.createdat: Created At
+task.form.updatedat: Updated At
+task.form.status: Status
+task.form.save: Add
+task.form.edit: Edit
+user.registration.minmessage: The name must have at least 3 chars
 task.empty_list: No task
 tag.empty_list: No tag
+category.form.name: Name
+category.form.description: Description
+category.form.color: Color
+category.form.save: Add
+button.delete: Delete
+button.update: Edit
+button.share: Share
+outdated.title: Outdated Tasks
+app.title: My great todolist app
+menu.task: Tasks
+menu.task.add: Create new task
+menu.task.list: List tasks
+menu.tag: Tags
+menu.tag.add: Add new tag
+menu.tag.list: List tags
+menu.category: Categories
+menu.category.add: Add new category
+menu.category.list: List categories
+menu.filter: Filters
+menu.filter.today: Tasks of the day
+menu.filter.week: Tasks of the week
+menu.filter.month: Tasks of the month
+menu.logout: Logout

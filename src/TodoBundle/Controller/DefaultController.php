@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     /**
+     * Affiche la page d'accueil
+     *
      * @Route("/", name="homepage")
      */
     public function indexAction()
@@ -21,8 +23,11 @@ class DefaultController extends Controller
                 $this->getUser()
             );
 
-        return $this->render('TodoBundle:Default:index.html.twig', array(
-            'tasks' => $tasks
-        ));
+        return $this->render(
+            'TodoBundle:Default:index.html.twig',
+            array(
+                'tasks' => $tasks,
+            )
+        );
     }
 }
