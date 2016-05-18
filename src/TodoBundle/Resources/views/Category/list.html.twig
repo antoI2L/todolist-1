@@ -3,8 +3,29 @@
 {% block body %}
     <h1>Categories list</h1>
     <table class="table table-striped table-bordered">
+        <tr>
+            <th>Category</th>
+            <th>Tasks count</th>
+            <th>Action</th>
+        </tr>
     {% for category in categories %}
-        <tr><td><a class="label label-default" style="background-color: {{ category.color }}; color: white" href="{{ path('list_task_category', {id: category.id}) }}">{{ category.name }}</a></td></tr>
+        <tr>
+            <td>
+                <a class="label label-default" style="background-color: {{ category.color }}; color: white" href="{{ path('list_task_category', {id: category.id}) }}">
+                    {{ category.name }}
+                </a>
+            </td>
+            <td>
+                This category has {{ category.tasks|length }} task(s).
+            </td>
+            <td>
+                {% if category.tasks is empty %}
+                    <a class="btn btn-danger" href="{{ path('remove_category', {'category': category.id}) }}">
+                        <i class="glyphicon glyphicon-trash"></i> Delete
+                    </a>
+                {% endif %}
+            </td>
+        </tr>
     {% else %}
         <tr><td>{% trans %}category.empty_list{% endtrans %}</td></tr>
     {% endfor %}

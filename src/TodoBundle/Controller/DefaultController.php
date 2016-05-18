@@ -12,6 +12,17 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('TodoBundle:Default:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $tasks = $this
+            ->getDoctrine()
+            ->getRepository('TodoBundle:Task')
+            ->getOutdatedTasks(
+                $this->getUser()
+            );
+
+        return $this->render('TodoBundle:Default:index.html.twig', array(
+            'tasks' => $tasks
+        ));
     }
 }

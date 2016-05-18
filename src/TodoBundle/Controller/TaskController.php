@@ -4,6 +4,7 @@ namespace TodoBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use TodoBundle\Entity\Tag;
 use TodoBundle\Entity\Task;
@@ -21,7 +22,12 @@ class TaskController extends Controller
 
         $task = new Task($this->getUser());
 
-        $form = $this->createForm(TaskType::class, $task);
+        $form = $this
+            ->createForm(TaskType::class, $task)
+            ->add('save', SubmitType::class, array(
+                'label' => 'task.form.save',
+                'attr' => ['class' => 'btn btn-default'],
+            ));
 
         $form->handleRequest($request);
 
@@ -176,6 +182,60 @@ class TaskController extends Controller
 
         return $this->render('TodoBundle:Task:list.html.twig', array(
             'tasks' => $tasks,
+        ));
+    }
+
+    /**
+     * @Route("/task/delete/{task}" , name="remove_task")
+     * @ParamConverter("task", class="TodoBundle:Task")
+     */
+    public function removeTask(Task $task){
+        $em = $this->getDoctrine()->getManager();
+
+
+        $em->remove($task);
+        $em->flush();
+
+        $this->addFlash(
+            'notice',
+            'Task ' . $task->getId() . ' removed with success'
+        );
+
+        return $this->redirect($this->generateUrl('list_task'));
+    }
+
+    /**
+     * @Route("/task/update/{task}", name="update_task")
+     * @ParamConverter("task", class="TodoBundle:Task")
+     */
+    public function updateAction(Request $request, Task $task)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this
+            ->createForm(TaskType::class, $task)
+            ->add('save', SubmitType::class, array(
+                'label' => 'Update',
+                'attr' => ['class' => 'btn btn-success'],
+            ));;
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em->persist($task);
+            $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Task updated with success'
+            );
+
+            return $this->redirect($this->generateUrl('list_task'));
+        }
+
+        return $this->render('TodoBundle:Task:update.html.twig', array(
+            'form' => $form->createView(),
+            'task' => $task
         ));
     }
 }

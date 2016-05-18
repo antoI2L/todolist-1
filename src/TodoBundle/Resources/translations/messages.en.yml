@@ -1,3 +1,4 @@
 hello_world: Hello World!
 homepage.welcome_message: Welcome on my todolist application
 task.empty_list: No task
+tag.empty_list: No tag

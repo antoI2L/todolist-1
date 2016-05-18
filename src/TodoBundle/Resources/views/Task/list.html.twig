@@ -24,6 +24,9 @@
             <th>
                 Tags
             </th>
+            <th>
+                Actions
+            </th>
         </tr>
     {% for task in pagination %}
         <tr>
@@ -45,6 +48,21 @@
                 {% for tag in task.tag %}
                 <a href="{{ path('list_task_tag', {tag: tag.id}) }}"><span class="glyphicon glyphicon-tag"></span> {{ tag.title }}</a>
                 {% endfor %}
+            </td>
+            <td>
+                <a class="btn btn-warning" href="{{ path('update_task', {'task': task.id}) }}">
+                    <i class="glyphicon glyphicon-edit"></i> Update
+                </a>
+                <a class="btn btn-danger" href="{{ path('remove_task', {'task': task.id}) }}">
+                    <i class="glyphicon glyphicon-trash"></i> Delete
+                </a>
+
+                {% set subject = 'Tâche n° ' ~ task.id ~ ' : ' ~ task.label %}
+                {% set body = 'Titre : ' ~ task.label ~ ', Description : ' ~ task.description ~ ', Echeance : ' ~ task.dueDate|date('d/m/Y à H:i') %}
+
+                <a class="btn btn-info" href="mailto:?subject={{ subject|url_encode }}&body={{ body|url_encode }}">
+                    <i class="glyphicon glyphicon-envelope"></i> Share
+                </a>
             </td>
         </tr>
     {% else %}

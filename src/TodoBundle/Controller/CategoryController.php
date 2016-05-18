@@ -4,6 +4,7 @@ namespace TodoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use TodoBundle\Entity\Category;
 use TodoBundle\Form\Type\CategoryType;
@@ -51,4 +52,31 @@ class CategoryController extends Controller
             'categories' => $categories,
         ));
     }
+
+
+    /**
+     * @Route("/category/delete/{category}" , name="remove_category")
+     * @ParamConverter("category", class="TodoBundle:Category")
+     */
+    public function removeTask(Category $category){
+        $em = $this->getDoctrine()->getManager();
+
+        if (0 === count($category->getTasks())) {
+            $em->remove($category);
+            $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Category ' . $category->getId() . ' removed with success'
+            );
+        } else {
+            $this->addFlash(
+                'notice',
+                'Category ' . $category->getId() . ' has tasks, it can\'t be removed.'
+            );
+        }
+
+        return $this->redirect($this->generateUrl('list_category'));
+    }
+
 }

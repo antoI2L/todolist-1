@@ -22,9 +22,11 @@ class TaskType extends AbstractType
             ))
             ->add('dueDate', null, array(
                 'label' => 'task.form.duedate',
+                'data' => new \DateTime
             ))
             ->add('remindAt', null, array(
                 'label' => 'task.form.remindat',
+                'data' => new \DateTime
             ))
             ->add('status', null, array(
                 'label' => 'task.form.status',
@@ -35,12 +37,7 @@ class TaskType extends AbstractType
             ))
             ->add('tag', null, array(
                 'attr' => ['class' => 'form-control'],
-            ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'task.form.save',
-                'attr' => ['class' => 'btn btn-default'],
-            ))
-        ;
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

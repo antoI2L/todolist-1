@@ -67,4 +67,14 @@ class Tag
 
         return $this;
     }
+
+    /**
+     * Permet de retourner une tâche
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTask()
+    {
+        return $this->task;
+    }
 }

@@ -87,4 +87,16 @@ class TaskRepository extends EntityRepository
             ->getResult()
             ;
     }
+
+    public function getOutdatedTasks(User $user)
+    {
+        return $this->createQueryBuilder('t')
+                    ->where('t.user = :user')
+                    ->andWhere('t.dueDate < :now')
+                    ->setParameter('user', $user)
+                    ->setParameter('now', date('Y-m-d H:i'))
+                    ->orderBy('t.dueDate', 'asc')
+                    ->getQuery()
+                    ->getResult();
+    }
 }

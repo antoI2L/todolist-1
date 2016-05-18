@@ -133,4 +133,14 @@ class Category
     {
         return $this->color;
     }
+
+    /**
+     * Permet de retourner
+     *
+     * @return mixed
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
 }
